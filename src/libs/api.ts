@@ -1,3 +1,4 @@
+import { Article } from "@/types/types";
 import { client } from "./client";
 // import { client } from "@/libs/client";
 
