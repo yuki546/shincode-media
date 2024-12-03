@@ -1,5 +1,6 @@
 import { Article } from "@/types/types";
 import Image from "next/image";
+import Link from "next/link";
 import React from "react";
 
 type ArticleCardProps = {
@@ -9,18 +10,32 @@ type ArticleCardProps = {
 const ArticleCard = ({ article }: ArticleCardProps) => {
   return (
     <div>
-      <div className="space-y-3">
-        <div className="mx-auto text-center">
-          <Image
-            src={article.thumbnails.url}
-            alt="thumbnail"
-            width={article.thumbnails.width}
-            height={article.thumbnails.height}
-          />
+      <div className="space-y-2">
+        <div>
+          <Link href={`/articles/${article.slug}`}>
+            <Image
+              src={article.thumbnails.url}
+              alt="thumbnail"
+              width={article.thumbnails.width}
+              height={article.thumbnails.height}
+              className="rounded-md hover:border-blue-600 hover:ring-2 transition-all duration-150"
+            />
+          </Link>
         </div>
-        <h3 className="text-left">{article.title}</h3>
-        <div className="flex gap-3 items-center">
-          <span>{article.createdAt}</span>
+        <Link
+          href={`/articles/${article.slug}`}
+          className="md:text-xl leading-10 text-left inline-block hover:text-blue-600 transition-all duration-150"
+        >
+          {article.title}
+        </Link>
+        <div className="flex gap-3 items-center text-gray-600">
+          <span>
+            {new Date(article.createdAt).toLocaleDateString("ja-JP", {
+              year: "numeric",
+              month: "numeric",
+              day: "numeric",
+            })}
+          </span>
           <span>{article.author}</span>
         </div>
       </div>
